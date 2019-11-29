@@ -1,14 +1,13 @@
 package com.miguel.first.controller;
 
-import com.miguel.first.Entity.ClienteEntity;
+import com.miguel.first.entity.ClienteEntity;
 import com.miguel.first.domain.Cliente;
 import com.miguel.first.repository.RepositoryCliente;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/cliente")
@@ -20,13 +19,9 @@ public class ControllerClient {
     @GetMapping(path = "/", produces = "application/json")
     public Cliente getClientes(){
 
-        ClienteEntity  clienteEntity = repositoryCliente.findId();
+        ClienteEntity  clienteEntity = repositoryCliente.findcliente();
 
-        Cliente cliente = new Cliente();
-
-        cliente.id = clienteEntity.getId();
-        cliente.nome = clienteEntity.getNome();
-        cliente.idade = clienteEntity.getIdade();
+        Cliente cliente = Mappers.getMapper(ClienteMapper.class).toCliente(clienteEntity);
 
         return cliente;
     }

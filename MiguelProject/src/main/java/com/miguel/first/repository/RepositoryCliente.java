@@ -1,13 +1,13 @@
 package com.miguel.first.repository;
 
-import com.miguel.first.Entity.ClienteEntity;
-import com.miguel.first.domain.Cliente;
+import com.miguel.first.entity.ClienteEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RepositoryCliente  extends CrudRepository<ClienteEntity, Integer> {
 
-
-    @Query(value =  "SELECT u FROM ClienteEntity u WHERE u.id = 1", nativeQuery = true)
-    ClienteEntity findId();
+    @Query("select a from ClienteEntity a where a.id = 1")
+    ClienteEntity findcliente();
 }

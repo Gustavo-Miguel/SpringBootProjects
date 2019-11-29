@@ -1,22 +1,24 @@
-package com.miguel.first.Entity;
+package com.miguel.first.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity(name="cliente")
+@Entity
+@Table(name="clientes")
 @Getter @Setter
 public class ClienteEntity {
 
     @Id
+    @GeneratedValue
+    @Column(name = "id")
     public int id;
 
+    @Column(name = "nome")
     public String nome;
 
+    @Column(name = "idade")
     public int idade;
 
     public int getId() {
