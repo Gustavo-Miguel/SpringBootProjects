@@ -12,7 +12,7 @@
 	<artifactId>Miguel-Project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MiguelProject</name>
-	<description>Primeiro Projeto de Spring Boot</description>
+	<description>Base project to experience tests</description>
 
 	<properties>
 		<java.version>1.8</java.version>
