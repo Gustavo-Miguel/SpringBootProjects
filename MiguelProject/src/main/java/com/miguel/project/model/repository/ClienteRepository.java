@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ClienteRepository extends CrudRepository<ClienteEntity, Integer> {
 
     @Query("select a from ClienteEntity a where a.nome = :nome")
-    ClienteEntity findcliente(@Param("nome") String nome);
+    ClienteEntity findByNome(@Param("nome") String nome);
 }

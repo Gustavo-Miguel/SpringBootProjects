@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class ClienteEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Integer id;
 

@@ -30,7 +30,7 @@ public class ClienteService {
 
     public ClienteDomain getCliente(String nome){
 
-       ClienteEntity clienteEntity = clienteRepository.findcliente(nome);
+       ClienteEntity clienteEntity = clienteRepository.findByNome(nome);
 
         ClienteDomain clienteDomain = Mappers.getMapper(ClienteMapper.class).entityToDomain(clienteEntity);
 
