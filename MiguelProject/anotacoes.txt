@@ -1,0 +1,8 @@
+docker run -v C:\Users\Gustavo\Desktop\WorkSpace\SpringBootProjects\MiguelProject\src\main\resources\scripts:/var/lib/mysql/ --name miguel-mysql -p 3306:3306 -e MYSQL_USER=miguel -e MYSQL_ROOT_PASSWORD=miguel -d mysql:latest
+
+Get-Content C:\Users\Gustavo\Desktop\WorkSpace\SpringBootProjects\MiguelProject\src\main\resources\data.sql | docker exec -i miguel-mysql sh -c 'exec mysql -uroot -p"miguel" migueldata' //run sql file into docker
+
+//docker run -p 8081:8081 --name users-mysql --link miguel-mysql:mysql -d users-mysql
+
+docker exec -it miguel-mysql mysql -uroot -p //conecta na instancia mysql
+
