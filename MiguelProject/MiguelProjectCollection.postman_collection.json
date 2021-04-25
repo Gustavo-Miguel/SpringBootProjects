@@ -6,13 +6,65 @@
 	},
 	"item": [
 		{
+			"name": "Autenticacao",
+			"item": [
+				{
+					"name": "Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Inserir Cliente",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyMDE4NjMyOX0.LdCydWPUuZEumMatXQ064NU16OIruL4fdzwjfQvAStJbPizZdgTnx9M6JWpfYbPhWkWsGJTCOzXpvmxMZFAQlQ",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"TESTE\",\r\n    \"idade\": 32\r\n}",
+					"raw": "{\r\n    \"nome\": \"MIGUELPROJECT\",\r\n    \"idade\": 54\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -37,6 +89,16 @@
 		{
 			"name": "Buscar Clientes",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyMDE4NjMyOX0.LdCydWPUuZEumMatXQ064NU16OIruL4fdzwjfQvAStJbPizZdgTnx9M6JWpfYbPhWkWsGJTCOzXpvmxMZFAQlQ",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -57,6 +119,16 @@
 		{
 			"name": "Buscar Cliente",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyMDE4NjMyOX0.LdCydWPUuZEumMatXQ064NU16OIruL4fdzwjfQvAStJbPizZdgTnx9M6JWpfYbPhWkWsGJTCOzXpvmxMZFAQlQ",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
