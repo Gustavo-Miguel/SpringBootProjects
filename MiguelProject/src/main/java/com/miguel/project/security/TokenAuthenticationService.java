@@ -1,11 +1,13 @@
 package com.miguel.project.security;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
@@ -20,14 +22,22 @@ public class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
 
-    static void addAuthentication(HttpServletResponse response, String username) {
+    static void addAuthentication(HttpServletResponse response, String username) throws IOException {
         String JWT = Jwts.builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
 
-        response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
+        ObjectMapper mapper = new ObjectMapper();
+        AccountCredentials accountCredentials = new AccountCredentials();
+        accountCredentials.setUsername(username);
+        accountCredentials.setToken("Bearer " + JWT);
+        String jsonString = mapper.writeValueAsString(accountCredentials);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(jsonString);
     }
 
     static Authentication getAuthentication(HttpServletRequest request) {

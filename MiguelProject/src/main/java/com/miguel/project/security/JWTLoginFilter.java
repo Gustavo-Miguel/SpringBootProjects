@@ -1,50 +1,54 @@
 package com.miguel.project.security;
 
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.IOException;
+import java.util.Collections;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@RestController
-public class JWTLoginFilter {
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-    @PostMapping("login")
-    public AccountCredentials login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
+public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-        String token = getJWTToken(username);
-        AccountCredentials user = new AccountCredentials();
-        user.setUsername(username);
-        user.setToken(token);
-        return user;
-
+    protected JWTLoginFilter(String url, AuthenticationManager authManager) {
+        super(new AntPathRequestMatcher(url));
+        setAuthenticationManager(authManager);
     }
 
-    private String getJWTToken(String username) {
-        String secretKey = "mySecretKey";
-        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList("ROLE_USER");
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException, IOException, ServletException {
 
-        String token = Jwts
-                .builder()
-                .setId("softtekJWT")
-                .setSubject(username)
-                .claim("authorities",
-                        grantedAuthorities.stream()
-                                .map(GrantedAuthority::getAuthority)
-                                .collect(Collectors.toList()))
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 600000))
-                .signWith(SignatureAlgorithm.HS512,
-                        secretKey.getBytes()).compact();
+        AccountCredentials credentials = new ObjectMapper()
+                .readValue(request.getInputStream(), AccountCredentials.class);
 
-        return "Bearer " + token;
+        return getAuthenticationManager().authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        credentials.getUsername(),
+                        credentials.getPassword(),
+                        Collections.emptyList()
+                )
+        );
     }
+
+    @Override
+    protected void successfulAuthentication(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain,
+            Authentication auth) throws IOException, ServletException {
+
+        TokenAuthenticationService.addAuthentication(response, auth.getName());
+    }
+
+
 }
