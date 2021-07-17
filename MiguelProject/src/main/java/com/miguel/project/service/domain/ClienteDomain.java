@@ -1,6 +1,5 @@
 package com.miguel.project.service.domain;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
