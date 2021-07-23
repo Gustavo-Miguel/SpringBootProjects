@@ -1,5 +1,6 @@
 package com.miguel.project.service;
 
+import com.miguel.project.controller.CasosRequest;
 import com.miguel.project.model.entity.CasosEntity;
 import com.miguel.project.service.domain.CasosDomain;
 import org.mapstruct.Mapper;
@@ -13,7 +14,7 @@ public interface CasosMapper {
 
     List<CasosDomain> entityToDomainList(List<CasosEntity> casosEntities);
 
-//    CasosDomain requestToDomain(ClienteRequest clienteRequest);
+    CasosDomain requestToDomain(CasosRequest casosRequest);
 
     CasosEntity domainToEntity(CasosDomain casosDomain);
 }
