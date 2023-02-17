@@ -14,13 +14,13 @@
 	<name>MiguelProject</name>
 	<description>Base project to experience tests</description>
 
-<!--	<repositories>-->
-<!--		<repository>-->
-<!--			<id>splunk-artifactory</id>-->
-<!--			<name>Splunk Releases</name>-->
-<!--			<url>https://splunk.jfrog.io/splunk/ext-releases-local</url>-->
-<!--		</repository>-->
-<!--	</repositories>-->
+	<repositories>
+		<repository>
+			<id>splunk-artifactory</id>
+			<name>Splunk Releases</name>
+			<url>https://splunk.jfrog.io/splunk/ext-releases-local</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -70,12 +70,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-<!--			<exclusions>-->
-<!--				<exclusion>-->
-<!--					<artifactId>spring-boot-starter-logging</artifactId>-->
-<!--					<groupId>org.springframework.boot</groupId>-->
-<!--				</exclusion>-->
-<!--			</exclusions>-->
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-logging</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -98,20 +98,20 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-log4j2</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.splunk.logging</groupId>-->
-<!--			<artifactId>splunk-library-javalogging</artifactId>-->
-<!--			<version>1.11.4</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.splunk</groupId>-->
-<!--			<artifactId>splunk</artifactId>-->
-<!--			<version>1.6.5.0</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.splunk.logging</groupId>
+			<artifactId>splunk-library-javalogging</artifactId>
+			<version>1.11.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.splunk</groupId>
+			<artifactId>splunk</artifactId>
+			<version>1.6.5.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

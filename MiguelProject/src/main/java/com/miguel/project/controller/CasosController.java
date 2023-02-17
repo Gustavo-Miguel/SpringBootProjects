@@ -4,7 +4,6 @@ import com.miguel.project.service.CasosMapper;
 import com.miguel.project.service.CasosService;
 import com.miguel.project.service.domain.CasosDomain;
 import com.miguel.project.util.MapperLog;
-import org.apache.commons.logging.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mapstruct.factory.Mappers;
