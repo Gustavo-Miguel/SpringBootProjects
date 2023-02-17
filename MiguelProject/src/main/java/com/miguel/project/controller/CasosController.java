@@ -1,5 +1,6 @@
 package com.miguel.project.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miguel.project.service.CasosMapper;
 import com.miguel.project.service.CasosService;
 import com.miguel.project.service.domain.CasosDomain;
@@ -32,9 +33,12 @@ public class CasosController {
     @PostMapping(path = "/",produces = "application/json", consumes = "application/json")
     public  CasosDomain postCliente(@RequestBody CasosRequest casosRequest) throws Exception {
 
-        logger.info("Teste splunk 1", MapperLog.mapToJsonString(casosRequest));
-
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosRequest));
         CasosDomain casosDomain = Mappers.getMapper(CasosMapper.class).requestToDomain(casosRequest);
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosRequest));
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosRequest));
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosRequest));
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosRequest));
 
         try {
             casosDomain = casosService.postCaso(casosDomain);

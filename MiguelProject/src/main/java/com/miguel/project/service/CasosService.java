@@ -1,8 +1,12 @@
 package com.miguel.project.service;
 
+import com.miguel.project.controller.CasosController;
 import com.miguel.project.model.entity.CasosEntity;
 import com.miguel.project.model.repository.CasosRepository;
 import com.miguel.project.service.domain.CasosDomain;
+import com.miguel.project.util.MapperLog;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,8 @@ import java.util.Optional;
 
 @Service
 public class CasosService {
+
+    Logger logger = LogManager.getLogger(CasosService.class);
 
     @Autowired
     private CasosRepository casosRepository;
@@ -28,6 +34,10 @@ public class CasosService {
     }
 
     public CasosDomain postCaso(CasosDomain casosDomain) throws Exception {
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosDomain));
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosDomain));
+        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosDomain));
+
         CasosEntity casosEntity = Mappers.getMapper(CasosMapper.class).domainToEntity(casosDomain);
 
         casosEntity = casosRepository.save(casosEntity);
