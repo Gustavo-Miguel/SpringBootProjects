@@ -3,7 +3,7 @@ package com.miguel.project.service;
 import com.miguel.project.model.entity.ClienteEntity;
 import com.miguel.project.model.repository.ClienteRepository;
 import com.miguel.project.service.domain.ClienteDomain;
-import org.mapstruct.factory.Mappers;
+import com.miguel.project.service.mapper.ClienteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,8 @@ import java.util.Optional;
 @Service
 public class ClienteService {
 
-
+    @Autowired
+    private ClienteMapper clienteMapper;
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -23,7 +24,7 @@ public class ClienteService {
         List<ClienteEntity> clienteEntities = new ArrayList<>();
         clienteRepository.findAll().forEach(clienteEntities::add);
 
-        List<ClienteDomain> clienteDomainList = Mappers.getMapper(ClienteMapper.class).entityToDomainList(clienteEntities);
+        List<ClienteDomain> clienteDomainList = clienteMapper.entityToDomainList(clienteEntities);
 
         return clienteDomainList;
     }
@@ -32,20 +33,20 @@ public class ClienteService {
 
        ClienteEntity clienteEntity = clienteRepository.findByNome(nome);
 
-        ClienteDomain clienteDomain = Mappers.getMapper(ClienteMapper.class).entityToDomain(clienteEntity);
+        ClienteDomain clienteDomain = clienteMapper.entityToDomain(clienteEntity);
 
         return clienteDomain;
     }
 
     public ClienteDomain postCliente(ClienteDomain clienteDomain) throws Exception {
-        ClienteEntity clienteEntity = Mappers.getMapper(ClienteMapper.class).domainToEntity(clienteDomain);
+        ClienteEntity clienteEntity = clienteMapper.domainToEntity(clienteDomain);
 
         clienteEntity = clienteRepository.save(clienteEntity);
 
         Optional<ClienteEntity> entityReturn = clienteRepository.findById(clienteEntity.getId());
 
         if (entityReturn.isPresent()){
-            clienteDomain = Mappers.getMapper(ClienteMapper.class).entityToDomain(entityReturn.get());
+            clienteDomain = clienteMapper.entityToDomain(entityReturn.get());
         } else {
             throw new Exception("Erro into save entity");
         }

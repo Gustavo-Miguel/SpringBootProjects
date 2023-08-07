@@ -1,4 +1,4 @@
-package com.miguel.project.controller;
+package com.miguel.project.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

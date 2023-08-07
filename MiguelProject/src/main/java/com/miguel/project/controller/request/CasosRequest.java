@@ -1,4 +1,4 @@
-package com.miguel.project.controller;
+package com.miguel.project.controller.request;
 
 import lombok.Getter;
 import lombok.Setter;

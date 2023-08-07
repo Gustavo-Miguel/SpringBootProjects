@@ -1,6 +1,7 @@
 package com.miguel.project.controller;
 
-import com.miguel.project.service.ClienteMapper;
+import com.miguel.project.controller.request.ClienteRequest;
+import com.miguel.project.service.mapper.ClienteMapper;
 import com.miguel.project.service.domain.ClienteDomain;
 import com.miguel.project.service.ClienteService;
 import org.mapstruct.factory.Mappers;

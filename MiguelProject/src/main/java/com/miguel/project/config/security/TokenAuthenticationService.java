@@ -1,4 +1,4 @@
-package com.miguel.project.security;
+package com.miguel.project.config.security;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -16,8 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class TokenAuthenticationService {
 
-    // EXPIRATION_TIME = 10 dias
-    static final long EXPIRATION_TIME = 10000;
+    static final long EXPIRATION_TIME = 100000000;
     static final String SECRET = "MySecret";
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";

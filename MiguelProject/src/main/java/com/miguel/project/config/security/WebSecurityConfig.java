@@ -1,4 +1,4 @@
-package com.miguel.project.security;
+package com.miguel.project.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

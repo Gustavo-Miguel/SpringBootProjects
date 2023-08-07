@@ -1,13 +1,11 @@
 package com.miguel.project.service;
 
-import com.miguel.project.controller.CasosController;
 import com.miguel.project.model.entity.CasosEntity;
 import com.miguel.project.model.repository.CasosRepository;
 import com.miguel.project.service.domain.CasosDomain;
-import com.miguel.project.util.MapperLog;
+import com.miguel.project.service.mapper.CasosMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,8 @@ public class CasosService {
     Logger logger = LogManager.getLogger(CasosService.class);
 
     @Autowired
+    private CasosMapper casosMapper;
+    @Autowired
     private CasosRepository casosRepository;
 
     public List<CasosDomain> getCasos(){
@@ -28,24 +28,21 @@ public class CasosService {
 
         casosRepository.findAll().forEach(casosEntities::add);
 
-        List<CasosDomain> casosDomainList = Mappers.getMapper(CasosMapper.class).entityToDomainList(casosEntities);
+        List<CasosDomain> casosDomainList = casosMapper.entityToDomainList(casosEntities);
 
         return  casosDomainList;
     }
 
     public CasosDomain postCaso(CasosDomain casosDomain) throws Exception {
-        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosDomain));
-        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosDomain));
-        logger.info("Teste splunk {} ", MapperLog.mapToJsonString(casosDomain));
 
-        CasosEntity casosEntity = Mappers.getMapper(CasosMapper.class).domainToEntity(casosDomain);
+        CasosEntity casosEntity = casosMapper.domainToEntity(casosDomain);
 
         casosEntity = casosRepository.save(casosEntity);
 
         Optional<CasosEntity> entityReturn = casosRepository.findById(casosEntity.getId());
 
         if (entityReturn.isPresent()){
-            casosDomain = Mappers.getMapper(CasosMapper.class).entityToDomain(entityReturn.get());
+            casosDomain = casosMapper.entityToDomain(entityReturn.get());
         } else {
             throw new Exception("Erro into save entity");
         }
