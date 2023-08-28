@@ -7,9 +7,7 @@ import lombok.Setter;
 @Setter
 public class ClienteDomain {
 
-    public Integer id;
-
-    public String nome;
-
-    public Integer idade;
+    private Integer id;
+    private String nome;
+    private Integer idade;
 }

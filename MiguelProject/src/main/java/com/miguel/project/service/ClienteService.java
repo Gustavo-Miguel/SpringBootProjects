@@ -48,7 +48,7 @@ public class ClienteService {
         if (entityReturn.isPresent()){
             clienteDomain = clienteMapper.entityToDomain(entityReturn.get());
         } else {
-            throw new Exception("Erro into save entity");
+            throw new Exception("Error into save entity");
         }
 
         return clienteDomain;

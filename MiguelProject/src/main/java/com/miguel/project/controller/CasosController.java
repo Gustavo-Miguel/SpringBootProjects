@@ -8,6 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,15 +24,15 @@ public class CasosController {
     private CasosService casosService;
 
     @GetMapping(path = "/", produces = "application/json")
-    public List<CasosDomain> getCasos(){
+    public ResponseEntity<List<CasosDomain>> getCasos(){
 
         List<CasosDomain> casosDomainList = casosService.getCasos();
 
-        return casosDomainList;
+        return new ResponseEntity<List<CasosDomain>>(casosDomainList, null, HttpStatus.OK);
     }
 
     @PostMapping(path = "/",produces = "application/json", consumes = "application/json")
-    public  CasosDomain postCliente(@RequestBody CasosRequest casosRequest) throws Exception {
+    public ResponseEntity<CasosDomain> postCaso(@RequestBody CasosRequest casosRequest) throws Exception {
 
         CasosDomain casosDomain = Mappers.getMapper(CasosMapper.class).requestToDomain(casosRequest);
 
@@ -40,6 +42,6 @@ public class CasosController {
             throw new Exception(e.getMessage());
         }
 
-        return casosDomain;
+        return new ResponseEntity<CasosDomain>(casosDomain, null, HttpStatus.OK);
     }
 }

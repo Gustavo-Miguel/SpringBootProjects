@@ -1,11 +1,13 @@
 package com.miguel.project.controller;
 
 import com.miguel.project.controller.request.ClienteRequest;
-import com.miguel.project.service.mapper.ClienteMapper;
-import com.miguel.project.service.domain.ClienteDomain;
 import com.miguel.project.service.ClienteService;
+import com.miguel.project.service.domain.ClienteDomain;
+import com.miguel.project.service.mapper.ClienteMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,23 +20,23 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping(path = "/", produces = "application/json")
-    public List<ClienteDomain> getClientes(){
+    public ResponseEntity<List<ClienteDomain>> getClientes(){
 
         List<ClienteDomain> clienteDomainList = clienteService.getClientes();
 
-        return clienteDomainList;
+        return new ResponseEntity<List<ClienteDomain>>(clienteDomainList, null, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{nome}", produces = "application/json")
-    public ClienteDomain getCliente(@PathVariable String nome){
+    public ResponseEntity<ClienteDomain> getCliente(@PathVariable String nome){
 
         ClienteDomain clienteDomain = clienteService.getCliente(nome);
 
-        return clienteDomain;
+        return new ResponseEntity<ClienteDomain>(clienteDomain, null, HttpStatus.OK);
     }
 
     @PostMapping(path = "/",produces = "application/json", consumes = "application/json")
-    public  ClienteDomain postCliente(@RequestBody ClienteRequest clienteRequest) throws Exception {
+    public ResponseEntity<ClienteDomain> postCliente(@RequestBody ClienteRequest clienteRequest) throws Exception {
         ClienteDomain clienteDomain = Mappers.getMapper(ClienteMapper.class).requestToDomain(clienteRequest);
 
         try {
@@ -43,7 +45,7 @@ public class ClienteController {
             throw new Exception(e.getMessage());
         }
 
-        return clienteDomain;
+        return new ResponseEntity<ClienteDomain>(clienteDomain, null, HttpStatus.OK);
     }
 
 }

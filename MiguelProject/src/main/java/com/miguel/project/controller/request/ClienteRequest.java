@@ -9,11 +9,11 @@ import lombok.Setter;
 public class ClienteRequest {
 
     @JsonProperty("id")
-    public Integer id;
+    private Integer id;
 
     @JsonProperty("nome")
-    public String nome;
+    private String nome;
 
     @JsonProperty("idade")
-    public Integer idade;
+    private Integer idade;
 }

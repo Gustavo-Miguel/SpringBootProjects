@@ -6,58 +6,54 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @Table(name="casos")
 public class CasosEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Integer id;
+    private Integer id;
 
     @Column(name = "nome")
-    public String nome;
+    private String nome;
 
     @Column(name = "idade")
-    public Integer idade;
+    private Integer idade;
 
     @Column(name = "sexo")
-    public String sexo;
+    private String sexo;
 
     @Column(name = "endereco")
-    public String endereco;
+    private String endereco;
 
     @Column(name = "cidade")
-    public String cidade;
+    private String cidade;
 
     @Column(name = "estado")
-    public String estado;
+    private String estado;
 
     @Column(name = "email")
-    public String email;
+    private String email;
 
     @Column(name = "telefone")
-    public String telefone;
+    private String telefone;
 
     @Column(name = "doenca")
-    public String doenca;
+    private String doenca;
 
     @Column(name = "data_contagio")
-    public LocalDate dataContagio;
+    private LocalDate dataContagio;
 
     @Column(name = "data_registro")
-    public LocalDate dataRegistro;
+    private LocalDate dataRegistro;
 
     @Column(name = "latitude")
-    public Double latitude;
+    private Double latitude;
 
     @Column(name = "longitude")
-    public Double longitude;
+    private Double longitude;
 
-
-    public Integer getId() {
-        return id;
-    }
 }

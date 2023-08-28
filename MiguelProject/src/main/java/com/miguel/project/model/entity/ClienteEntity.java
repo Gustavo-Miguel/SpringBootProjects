@@ -5,24 +5,20 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @Table(name="clientes")
 public class ClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Integer id;
+    private Integer id;
 
     @Column(name = "nome")
-    public String nome;
+    private String nome;
 
     @Column(name = "idade")
-    public Integer idade;
-
-    public Integer getId() {
-        return id;
-    }
+    private Integer idade;
 }
